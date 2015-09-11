@@ -16,6 +16,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".server.DataService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.hyxbiao.nut.pluginfile"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/plugin_paths" />
+        </provider>
+
+        <service
+            android:name=".plugin.RemotePluginIntentService"
+            android:exported="false" >
+        </service>
+        <service
+            android:name=".plugin.RemotePluginService"
+            android:exported="false" >
+        </service>
     </application>
 
 </manifest>
