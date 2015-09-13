@@ -15,6 +15,7 @@ import java.lang.reflect.Method;
 import java.net.URI;
 import java.util.Enumeration;
 
+import com.hyxbiao.nut.server.RemoteData;
 import com.taobao.android.dexposed.DeviceCheck;
 import com.taobao.android.dexposed.DexposedBridge;
 import com.taobao.android.dexposed.XC_MethodHook;
@@ -69,6 +70,13 @@ public class InjectProxy {
                     break;
             }
 
+            Log.d(TAG, "bind remote service");
+            //bind remote service
+            RemoteData remoteData = RemoteData.getInstance();
+            remoteData.bindService(context);
+
+
+            Log.d(TAG, "bind finish");
 
             isInited = true;
         } catch (Exception e) {
@@ -179,6 +187,7 @@ public class InjectProxy {
 
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+
                     HttpResponse response = (HttpResponse) param.getResult();
                     // The array args include all the parameters.
                     HttpUriRequest request = (HttpUriRequest) param.args[0];
@@ -186,6 +195,7 @@ public class InjectProxy {
                     //response.getEntity();
                     int status_code = response.getStatusLine().getStatusCode();
                     Log.d("Hook", "status_code: " + status_code + ", uri: " + uri.toString());
+                    RemoteData.getInstance().debug(uri.toString());
                 }
             });
         } catch (ClassNotFoundException e) {

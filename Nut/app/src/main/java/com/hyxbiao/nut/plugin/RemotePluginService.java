@@ -53,7 +53,7 @@ public class RemotePluginService extends Service implements ServiceConnection {
         Log.d(TAG, "handleInstallPlugin");
 
         final Bundle bundle = new Bundle();
-        if (mBound) {
+        if (!mBound) {
             bundle.putString("result", "CommandService is null");
             recevier.send(IPluginCallback.STATUS_FAIL, bundle);
             return;

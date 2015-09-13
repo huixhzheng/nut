@@ -17,6 +17,7 @@ import com.hyxbiao.nut.client.ICommand;
 import com.hyxbiao.nut.plugin.IPluginInstallCallback;
 import com.hyxbiao.nut.plugin.Plugin;
 import com.hyxbiao.nut.plugin.PluginManager;
+import com.hyxbiao.nut.plugin.RemotePluginService;
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
@@ -35,6 +36,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         bt_transfer.setOnClickListener(this);
         bt_plugin_install.setOnClickListener(this);
+
     }
 
 
@@ -42,6 +44,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_transfer:
+                invokePlugin();
                 break;
             case R.id.bt_plugin_install:
                 pluginInstall();
@@ -49,6 +52,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             default:
                 break;
         }
+    }
+
+    private void invokePlugin() {
+        Log.d(TAG, "111 click");
+
+        Plugin plugin = new Plugin("test.txt");
+        plugin.invoke(MainActivity.this);
     }
 
     private void pluginInstall() {

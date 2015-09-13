@@ -67,7 +67,11 @@ public class Plugin {
 
         //remote copy
         //dexclassloader
-        mPluginLoader.load(context, pluginFile.getAbsolutePath(), callback);
+        mPluginLoader.load(context, pluginFile, callback);
+    }
+
+    public void invoke(Context context) {
+        mPluginLoader.invoke(context);
     }
 
     public void uninstall() {

@@ -18,9 +18,12 @@
         </activity>
 
         <service
-            android:name=".server.DataService"
+            android:name=".server.RemoteDataService"
             android:enabled="true"
             android:exported="true" >
+            <intent-filter>
+                <action android:name="com.hyxbiao.nut.server.RemoteDataService" />
+            </intent-filter>
         </service>
 
         <provider
